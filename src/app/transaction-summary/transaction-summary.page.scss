@@ -1,0 +1,29 @@
+ion-list {
+    margin-bottom: 25px;
+    
+    ion-list-header {
+      background: #f8f9fa;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      
+      ion-label {
+        font-weight: 600;
+        color: var(--ion-color-primary);
+      }
+    }
+  
+    ion-item {
+      --padding-start: 0;
+      --inner-padding-end: 0;
+      
+      ion-note {
+        font-size: 0.9rem;
+        color: #6c757d;
+      }
+    }
+  }
+  
+  ion-card {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+  }

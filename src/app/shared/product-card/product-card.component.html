@@ -1,0 +1,27 @@
+<ion-card class="product-card" (click)="viewProduct()">
+  <div class="image-container">
+    <img [src]="product.image" alt="{{ product.title }}" class="product-image">
+    <div class="top-tags">
+      <ion-badge color="danger" class="discount-badge">
+        {{ product.rating.rate | number: '1.1-1' }}★
+      </ion-badge>
+      <span class="product-id">No.{{ product.id }}</span>
+    </div>
+  </div>
+
+  <ion-card-header>
+    <ion-card-title class="product-title">{{ product.title }}</ion-card-title>
+    <ion-card-subtitle class="product-category">{{ product.category }}</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content class="footer-section">
+    <div class="price-container">
+      <span class="current-price">${{ product.price | number: '1.2-2' }}</span>
+    </div>
+    
+    <div class="purchases-container">
+      <ion-icon name="bag-handle-outline" class="purchase-icon"></ion-icon>
+      <span class="purchase-count">{{ product.rating.count | number }} compras</span>
+    </div>
+  </ion-card-content>
+</ion-card>

@@ -1,0 +1,14 @@
+<ion-content>
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando productos...</p>
+  </div>
+
+  <div *ngIf="!loading" class="products-grid">
+    <app-product-card 
+      *ngFor="let product of productsList"
+      [product]="product"
+      >
+    </app-product-card>
+  </div>
+</ion-content>

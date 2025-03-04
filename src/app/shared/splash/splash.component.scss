@@ -1,0 +1,23 @@
+.splash-container {
+    --background: #222;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .centered-content {
+      
+      text-align: center;
+  
+      ion-spinner {
+        width: 50px;
+        height: 50px;
+        color: white;
+      }
+  
+      h1 {
+        color: white;
+        margin-top: 20px;
+      }
+    }
+  }

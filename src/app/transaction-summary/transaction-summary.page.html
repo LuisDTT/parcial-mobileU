@@ -1,0 +1,75 @@
+<ion-content class="ion-padding">
+  <div *ngIf="transactionData">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>¡Pago Exitoso!</ion-card-title>
+        <ion-card-subtitle>Gracias por su compra, {{ transactionData.customerInfo.fullName }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Información del Cliente</ion-label>
+          </ion-list-header>
+          
+          <ion-item>
+            <ion-label>Nombre:</ion-label>
+            <ion-note slot="end">{{ transactionData.customerInfo.fullName }}</ion-note>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Email:</ion-label>
+            <ion-note slot="end">{{ transactionData.customerInfo.email }}</ion-note>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Dirección:</ion-label>
+            <ion-note slot="end">{{ transactionData.customerInfo.address }}</ion-note>
+          </ion-item>
+        </ion-list>
+
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Detalles de Pago</ion-label>
+          </ion-list-header>
+          
+          <ion-item>
+            <ion-label>Tarjeta:</ion-label>
+            <ion-note slot="end">**** **** **** {{ transactionData.customerInfo.cardNumber.slice(-4) }}</ion-note>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Expira:</ion-label>
+            <ion-note slot="end">{{ transactionData.customerInfo.expiry }}</ion-note>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>CVV:</ion-label>
+            <ion-note slot="end">***</ion-note>
+          </ion-item>
+        </ion-list>
+
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Detalles de la Transacción</ion-label>
+          </ion-list-header>
+          
+          <ion-item>
+            <ion-label>Fecha:</ion-label>
+            <ion-note slot="end">{{ transactionData.date | date:'medium' }}</ion-note>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label>Total:</ion-label>
+            <ion-note slot="end">{{ transactionData.total | currency }}</ion-note>
+          </ion-item>
+        </ion-list>
+
+        <ion-button expand="block" routerLink="/home">
+          <ion-icon name="home" slot="start"></ion-icon>
+          Volver al Inicio
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

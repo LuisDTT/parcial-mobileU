@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Carrito</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="(cartItems | async)?.length === 0" class="empty-cart">
+    <ion-icon name="cart-outline"></ion-icon>
+    <h2>Tu carrito está vacío</h2>
+  </div>
+
+  <ion-list *ngIf="((cartItems | async)?.length ?? 0) > 0">
+    <ion-item *ngFor="let item of cartItems | async">
+      <ion-thumbnail slot="start">
+        <img [src]="item.product.image">
+      </ion-thumbnail>
+      
+      <ion-label>
+        <h2>{{ item.product.title }}</h2>
+        <p>{{ item.product.category }}</p>
+        <ion-note>${{ item.product.price | number:'1.2-2' }}</ion-note>
+      </ion-label>
+
+      <ion-buttons slot="end">
+        <ion-button (click)="updateQuantity(item.product.id, item.quantity - 1)">
+          <ion-icon name="remove-circle"></ion-icon>
+        </ion-button>
+        
+        <ion-input type="number" 
+  [value]="item.quantity"
+  min="1"
+  (ionChange)="handleQuantityChange(item.product.id, $event)">
+</ion-input>
+
+        <ion-button (click)="updateQuantity(item.product.id, item.quantity + 1)">
+          <ion-icon name="add-circle"></ion-icon>
+        </ion-button>
+        
+        <ion-button color="danger" (click)="removeFromCart(item.product.id)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <ion-footer *ngIf="((cartItems | async)?.length ?? 0) > 0 && !showCheckoutForm">
+  <ion-toolbar>
+    <ion-title>Total: ${{ total | async | number:'1.2-2' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="success" (click)="showCheckoutForm = true">
+        Checkout
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+
+</ion-content>
+
+<ion-grid *ngIf="showCheckoutForm" class="checkout-form">
+  <ion-row>
+    <ion-col size="12">
+      <h2>Información del cliente</h2>
+      <form [formGroup]="checkoutForm" (ngSubmit)="submitPayment()">
+        <ion-item>
+          <ion-label position="floating">Nombre completo</ion-label>
+          <ion-input formControlName="fullName" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Correo electrónico</ion-label>
+          <ion-input type="email" formControlName="email" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Dirección</ion-label>
+          <ion-input formControlName="address" required></ion-input>
+        </ion-item>
+
+        <h2>Información de pago</h2>
+        
+        <ion-item>
+          <ion-label position="floating">Número de tarjeta</ion-label>
+          <ion-input formControlName="cardNumber" type="tel" required></ion-input>
+        </ion-item>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Expira (MM/AA)</ion-label>
+              <ion-input formControlName="expiry" required></ion-input>
+            </ion-item>
+          </ion-col>
+          
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">CVV</ion-label>
+              <ion-input formControlName="cvv" type="tel" required></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-button 
+          expand="block" 
+          type="submit" 
+          [disabled]="checkoutForm.invalid"
+          class="submit-button"
+        >
+          Confirmar pago
+        </ion-button>
+        
+        <ion-button 
+          expand="block" 
+          fill="outline" 
+          color="medium" 
+          (click)="cancelCheckout()"
+        >
+          Cancelar
+        </ion-button>
+      </form>
+    </ion-col>
+  </ion-row>
+</ion-grid>

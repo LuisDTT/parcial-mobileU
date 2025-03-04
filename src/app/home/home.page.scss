@@ -25,3 +25,81 @@
 #container a {
   text-decoration: none;
 }
+
+.category-selector {
+  padding: 16px;
+  background: #000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  
+  ion-item {
+    --background: #222;
+    --border-radius: 12px;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --inner-padding-end: 0;
+    
+    ion-label[position="stacked"] {
+      color: #fff;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    
+    ion-select {
+      width: 100%;
+      --padding-start: 0;
+      --padding-end: 0;
+      --placeholder-color: #adb5bd;
+      --placeholder-opacity: 1;
+    }
+  }
+}
+
+ion-select::part(icon) {
+  color: #0ff;
+}
+
+ion-select::part(text) {
+  color: #fff;
+  font-weight: 500;
+}
+
+ion-select-option {
+  --color: #495057;
+  --color-hover: #2a9d8f;
+}
+
+.category-selector ion-item {
+  border-radius: 12px;
+  border: 2px solid #e9ecef;
+  transition: border-color 0.3s ease;
+
+  &:hover {
+    border-color: #2a9d8f;
+  }
+}
+
+ion-select.popover-select {
+  --width: 90%;
+  --max-width: 400px;
+  
+  ion-list {
+    padding: 8px 0;
+    
+    ion-item {
+      --min-height: 48px;
+      
+      ion-label {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+ion-select::part(icon) {
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+
+ion-select.select-expanded::part(icon) {
+  transform: rotate(180deg);
+}
