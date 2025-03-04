@@ -1,0 +1,1 @@
+Parcial de LUIS DANIEL TORRES TOMALA
